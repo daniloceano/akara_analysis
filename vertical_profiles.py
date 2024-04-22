@@ -6,7 +6,7 @@
 #    By: daniloceano <danilo.oceano@gmail.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 21:06:36 by daniloceano       #+#    #+#              #
-#    Updated: 2024/04/19 21:20:14 by daniloceano      ###   ########.fr        #
+#    Updated: 2024/04/22 14:26:08 by daniloceano      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,41 +19,32 @@ import matplotlib.dates as mdates
 import matplotlib.colors as colors
 import cmocean as cmo
 
-# Load the data
-variable = 'MFD'
-results_file = f"ATMOS-BUD_Akara-subset_ERA5_track/{variable}.csv"
+# Set up directories
+figures_path = 'figures/'
+os.makedirs(figures_path, exist_ok=True)
 
-df = pd.read_csv(results_file, index_col=0)
-df.columns = pd.to_datetime(df.columns)
-df.index = df.index/100
+# Variables to plot
+variables = ['AdvHTemp', 'ResT', 'AdvHZeta', 'Omega']
 
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.invert_yaxis()
+for variable in variables:
+    file = f"ATMOS-BUD_Akara-subset_ERA5_track/{variable}.csv"
+    df = pd.read_csv(file, index_col=0)
 
-# Resample the data to daily means
-df_T = df.T
-df_T.index = pd.to_datetime(df_T.index)
-daily_mean = df_T.resample('2D').mean().T
-daily_mean = daily_mean.iloc[10:]
+    # Mak daily means
+    df = df.T
+    df.index = pd.to_datetime(df.index)
+    df_daily = df.resample('D').mean()
+    df = df_daily.T
+    df.columns = df.columns.strftime('%Y-%m-%d')
+    df.index = df.index/100
 
-# Plot daily means
-for time_step in range(len(daily_mean.columns)):
-    print(df.columns[time_step])
-
-    # Select the time step
-    time = daily_mean.columns[time_step]
-    data = daily_mean[time]
-
-    # Plot the data
-    ax.plot(data, data.index, label=time.strftime('%Y-%m-%d'))
-
-ax.axvline(x=0, color='black', linestyle='--', zorder=1)
-
-# Labels and title
-ax.set_title(variable)
-ax.set_ylabel('Pressure Level (hPa)')  # assuming units are in Pascal, adjust as needed
-ax.legend()
-
-plt.xticks(rotation=45)
-plt.savefig(f"figures/{variable}.png")
-    
+    # Plot vertical profiles 
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(df, df.index, label=df.columns, linewidth=2)
+    ax.axvline(0, color='k', linewidth=0.5, zorder=2)
+    ax.grid(True, linestyle='--', linewidth=0.5, zorder=1)
+    ax.invert_yaxis()
+    ax.set_ylabel('Pressure [hPa]')
+    ax.title.set_text(f'{variable}')
+    plt.legend()
+    plt.savefig(figures_path + f'vertical_profile_{variable}.png', dpi=300)
