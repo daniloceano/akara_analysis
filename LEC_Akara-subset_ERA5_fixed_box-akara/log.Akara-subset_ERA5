@@ -1,0 +1,55 @@
+2024-04-22 14:09:49,630 - lorenz_cycle - INFO - Starting LEC analysis
+2024-04-22 14:09:49,630 - lorenz_cycle - INFO - Command line arguments: Namespace(infile='../nc_data/Akara-subset_ERA5.nc', residuals=True, geopotential=True, fixed=True, track=False, choose=False, zeta=False, mpas=False, plots=True, verbosity=False, cdsapi=False, trackfile='inputs/track', outname=None)
+2024-04-22 14:09:51,686 - lorenz_cycle - INFO - Bounding box: min_lon=-50.0, max_lon=-35.0, min_lat=-37.5, max_lat=-20.0
+2024-04-22 14:09:53,369 - lorenz_cycle - INFO - Computed energy contents
+2024-04-22 14:09:54,089 - lorenz_cycle - INFO - Computed conversion terms
+2024-04-22 14:09:55,473 - lorenz_cycle - INFO - Computed boundary terms
+2024-04-22 14:09:55,576 - lorenz_cycle - INFO - Computed generation dissipation terms
+2024-04-22 14:09:55,579 - lorenz_cycle - INFO - Computed budget and residuals
+2024-04-22 14:09:55,581 - lorenz_cycle - INFO - Results saved to ../LEC_Results/Akara-subset_ERA5_fixed/Akara-subset_ERA5_fixed_results.csv
+2024-04-22 14:09:55,584 - lorenz_cycle - INFO - Generating plots..
+2024-04-22 14:09:55,584 - lorenz_cycle - INFO - Plotting timeseries...
+2024-04-22 14:09:55,843 - lorenz_cycle - INFO - Figure saved for energy in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:55,972 - lorenz_cycle - INFO - Figure saved for conversion in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,067 - lorenz_cycle - INFO - Figure saved for boundary in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,181 - lorenz_cycle - INFO - Figure saved for budget_diff in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,277 - lorenz_cycle - INFO - Figure saved for residuals in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,365 - lorenz_cycle - INFO - Figure saved for generation_dissipation in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,459 - lorenz_cycle - INFO - Figure saved for comparing_generation in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,548 - lorenz_cycle - INFO - Figure saved for comparing_dissipation in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/timeseries
+2024-04-22 14:09:56,548 - lorenz_cycle - INFO - Plotting box limits on map...
+2024-04-22 14:09:56,918 - lorenz_cycle - INFO - Figure saved in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures
+2024-04-22 14:09:56,918 - lorenz_cycle - INFO - Plotting boxplots...
+2024-04-22 14:09:56,929 - lorenz_cycle - INFO - Creating boxplot for each time
+2024-04-22 14:09:57,826 - lorenz_cycle - INFO - Figure saved in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots
+2024-04-22 14:09:58,866 - lorenz_cycle - INFO - Figure saved in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots
+2024-04-22 14:09:59,363 - lorenz_cycle - INFO - Figure saved in directory: ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots
+2024-04-22 14:09:59,363 - lorenz_cycle - INFO - Creating boxplot for each vertical level
+2024-04-22 14:09:59,942 - lorenz_cycle - INFO - Created ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots/boxplot_vertical_levels_energy.png
+2024-04-22 14:10:00,527 - lorenz_cycle - INFO - Created ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots/boxplot_vertical_levels_conversion.png
+2024-04-22 14:10:00,820 - lorenz_cycle - INFO - Created ../LEC_Results/Akara-subset_ERA5_fixed/Figures/boxplots/boxplot_vertical_levels_generation_dissipation.png
+2024-04-22 14:10:00,820 - lorenz_cycle - INFO - Creating boxplot for each term
+2024-04-22 14:10:00,957 - lorenz_cycle - INFO - boxplot_terms_energy.png created
+2024-04-22 14:10:01,033 - lorenz_cycle - INFO - boxplot_terms_conversion.png created
+2024-04-22 14:10:01,108 - lorenz_cycle - INFO - boxplot_terms_boundary.png created
+2024-04-22 14:10:01,194 - lorenz_cycle - INFO - boxplot_terms_budget_diff.png created
+2024-04-22 14:10:01,270 - lorenz_cycle - INFO - boxplot_terms_residuals.png created
+2024-04-22 14:10:01,330 - lorenz_cycle - INFO - boxplot_terms_generation_dissipation.png created
+2024-04-22 14:10:01,404 - lorenz_cycle - INFO - boxplot_terms_comparing_generation.png created
+2024-04-22 14:10:01,465 - lorenz_cycle - INFO - boxplot_terms_comparing_dissipation.png created
+2024-04-22 14:10:01,548 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_example.png
+2024-04-22 14:10:01,623 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-14.png
+2024-04-22 14:10:01,695 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-15.png
+2024-04-22 14:10:01,767 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-16.png
+2024-04-22 14:10:01,839 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-17.png
+2024-04-22 14:10:01,910 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-18.png
+2024-04-22 14:10:01,982 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-19.png
+2024-04-22 14:10:02,053 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-20.png
+2024-04-22 14:10:02,125 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-21.png
+2024-04-22 14:10:02,198 - lorenz_cycle - INFO - Lorenz cycle plot saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/LEC/LEC_2024-02-22.png
+2024-04-22 14:10:02,209 - lorenz_cycle - INFO - Creating hovmoller diagrams
+2024-04-22 14:10:02,766 - lorenz_cycle - INFO - Figure saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/hovmollers/hovmoller_energy.png
+2024-04-22 14:10:03,478 - lorenz_cycle - INFO - Figure saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/hovmollers/hovmoller_conversion.png
+2024-04-22 14:10:03,816 - lorenz_cycle - INFO - Figure saved to ../LEC_Results/Akara-subset_ERA5_fixed/Figures/hovmollers/hovmoller_generation_dissipation.png
+2024-04-22 14:10:03,816 - lorenz_cycle - INFO - Hovmoller diagrams created
+2024-04-22 14:10:03,816 - lorenz_cycle - INFO - --- 13.50830364227295 seconds running fixed framework ---

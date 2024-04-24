@@ -6,57 +6,58 @@
 #    By: daniloceano <danilo.oceano@gmail.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 21:06:29 by daniloceano       #+#    #+#              #
-#    Updated: 2024/04/19 21:07:29 by daniloceano      ###   ########.fr        #
+#    Updated: 2024/04/22 14:24:07 by daniloceano      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
 import os
 import pandas as pd
-import numpy as np
+import cmocean.cm as cmo
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import matplotlib.colors as colors
-import cmocean as cmo
+import matplotlib.dates as mdates
+from matplotlib.dates import DateFormatter
 
-# Load the data
-variable = 'MFD'
-results_file = f"ATMOS-BUD_Akara-subset_ERA5_track/{variable}.csv"
+# Set up directories
+figures_path = 'figures/'
+os.makedirs(figures_path, exist_ok=True)
 
-df = pd.read_csv(results_file, index_col=0)
-df.columns = pd.to_datetime(df.columns)
-df.index = df.index/100
+# Variables to plot
+variables = ['AdvHTemp', 'ResT', 'AdvHZeta', 'Omega']
 
-# Prepare the plot
-fig, ax = plt.subplots(figsize=(12, 6))
+for variable in variables:
+    file = f'../ATMOS-BUD_Results/sample1_ERA5_track/{variable}.csv'
+    df = pd.read_csv(file, index_col=0)
+    df.columns = pd.to_datetime(df.columns)
+    df.columns = df.columns.strftime('%Y-%m-%d %H:%M')
+    df.index = df.index/100
 
-# Normalize the data limits for the colorbar
-imin = df.min(numeric_only=True).min()
-imax = df.max(numeric_only=True).max()
-absmax = np.amax([np.abs(imin), imax])
-norm = colors.TwoSlopeNorm(vcenter=0, vmin=-absmax * 0.8, vmax=absmax * 0.8)
+    # Plot hovmollers
+    fig, ax = plt.subplots(figsize=(10, 5))
+    # Adjusts limits of colormap to max, min and zero
+    norm = colors.TwoSlopeNorm(vmin=df.to_numpy().min(), vcenter=0, vmax=df.to_numpy().max())
 
-levels = np.linspace(-absmax, absmax, 10)
+    # plot hovmoller diagram
+    fig, ax = plt.subplots(figsize=(10,10))
+    im = ax.contourf(df.columns, df.index, df.values, cmap=cmo.balance, levels=7)
+    cbar = fig.colorbar(im)
 
-# Create the Hovmöller diagram
-c = ax.contourf(df.columns, df.index.astype(float), df, cmap=cmo.cm.balance,
-                norm=norm, levels=levels, extend='both')
+    # invert y-axis
+    ax.invert_yaxis()
 
-# Set the format of the date on the x-axis
-ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))  # adjust interval as needed
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    # format x-axis as date and rotate tick labels
+    ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+    ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d'))
+    ax.tick_params(axis='x', labelrotation=45)
 
-ax.invert_yaxis()
+    # Set title and axis labels
+    ax.set_title(f'{variable}', fontsize=16)
+    ax.set_ylabel('Pressure [hPa]', fontsize=14)
 
-# Adding color bar
-plt.colorbar(c, ax=ax, label='Values')
+    # edit colorbar legend
+    cbar.ax.tick_params(labelsize=10)
 
-# Labels and title
-ax.set_title(variable)
-ax.set_ylabel('Pressure Level (hPa)')  # assuming units are in Pascal, adjust as necessary
-
-plt.xticks(rotation=45)
-plt.tight_layout()
+    plt.savefig(figures_path + f'hovmoller_{variable}.png', dpi=300)
 
 figures_directory = "figures"
 os.makedirs(figures_directory, exist_ok=True)
