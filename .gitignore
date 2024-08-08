@@ -161,3 +161,5 @@ cython_debug/
 
 
 Banner_CPAM/*nc
+*/.DS_Store
+figures/.DS_Store
