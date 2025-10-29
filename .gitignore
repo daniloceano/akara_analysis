@@ -166,3 +166,5 @@ figures/.DS_Store
 new_files/*.nc
 old_files/*nc
 old_files/*/*nc
+new_files/akara1_fixed/
+new_files/akara1_track/
