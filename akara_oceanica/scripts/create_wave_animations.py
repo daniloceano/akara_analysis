@@ -38,6 +38,24 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# If imageio-ffmpeg is installed in the venv, prefer its bundled ffmpeg binary
+try:
+    import imageio_ffmpeg
+    ffmpeg_path = None
+    try:
+        ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        ffmpeg_path = None
+
+    if ffmpeg_path:
+        import matplotlib as mpl
+        mpl.rcParams['animation.ffmpeg_path'] = ffmpeg_path
+        logger.info(f"🎛️ Using ffmpeg from imageio-ffmpeg: {ffmpeg_path}")
+    else:
+        logger.info("ℹ️ imageio-ffmpeg present but could not get ffmpeg exe; system ffmpeg may still be required.")
+except Exception:
+    logger.info("ℹ️ imageio-ffmpeg not installed; system ffmpeg required for saving animations.")
+
 # Project root directory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -252,12 +270,13 @@ class SatelliteWaveAnimator:
             else:
                 return pd.DataFrame()
     
-    def create_single_frame(self, ax, time_idx, satellite=None):
+    def create_single_frame(self, ax, cbar_ax, time_idx, satellite=None):
         """
         Create a single animation frame.
         
         Args:
             ax: Matplotlib axis
+            cbar_ax: Colorbar axis
             time_idx: Time index
             satellite: Satellite name (None = all)
         """
@@ -267,6 +286,7 @@ class SatelliteWaveAnimator:
         current_time = self.time_bins[time_idx]
         
         # Plot ERA5 background field
+        im = None
         if self.era5_wave_var:
             era5_data = self.era5_ds[self.era5_wave_var].isel(time=time_idx)
             
@@ -352,6 +372,13 @@ class SatelliteWaveAnimator:
             pad=10
         )
         
+        # Update colorbar
+        if im is not None:
+            cbar_ax.clear()
+            cbar = plt.colorbar(im, cax=cbar_ax, orientation='vertical')
+            cbar.set_label('Significant Wave Height (m)', fontsize=12, color='white')
+            cbar.ax.tick_params(labelsize=10, colors='white')
+        
         return ax
     
     def create_animation(self, satellite=None, fps=2, interval=500):
@@ -368,14 +395,20 @@ class SatelliteWaveAnimator:
         file_safe_name = str(sat_name).replace('/', '_')
         logger.info(f"🎬 Creating animation: {sat_name}")
         
-        # Create figure
-        fig = plt.figure(figsize=(16, 10), facecolor='black')
-        ax = plt.axes(projection=ccrs.PlateCarree())
+        # Create figure with colorbar
+        fig = plt.figure(figsize=(18, 10), facecolor='black')
+        
+        # Create gridspec for main plot and colorbar
+        import matplotlib.gridspec as gridspec
+        gs = gridspec.GridSpec(1, 2, width_ratios=[20, 1], wspace=0.02)
+        
+        ax = plt.subplot(gs[0], projection=ccrs.PlateCarree())
+        cbar_ax = plt.subplot(gs[1])
         
         # Create animation
         def update_frame(frame_idx):
             logger.info(f"  Frame {frame_idx+1}/{len(self.time_bins)}")
-            return self.create_single_frame(ax, frame_idx, satellite)
+            return self.create_single_frame(ax, cbar_ax, frame_idx, satellite)
         
         anim = animation.FuncAnimation(
             fig,
@@ -411,7 +444,7 @@ def main():
     
     # Configure paths
     data_dir = 'data'
-    era5_file = 'data/era5_waves/era5_waves_akara_20240216_20240220.nc'
+    era5_file = 'data/era5_waves/era5_waves_akara_20240214_20240222.nc'
     output_dir = 'figures/animations'
     
     # Check if ERA5 exists

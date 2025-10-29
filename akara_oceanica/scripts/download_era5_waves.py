@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
 Script para baixar e processar dados de ondas do ERA5.
-Usa dados reais do Copernicus Climate Data Store (CDS) para complementar a análise do SWOT.
+Usa dados reais do Copernicus Climate Data Store (CDS) para análise oceânica.
 
-ERA5 fornece dados de ondas em tempo real incluindo:
+ERA5 fornece dados de ondas incluindo:
 - Altura significativa de ondas (swh)
 - Direção média das ondas (mwd)
 - Período médio das ondas (mwp)
 - Período de pico das ondas (pp1d)
 
 Dataset: ERA5 hourly data on single levels
-Resolução: 0.25° (~28 km), dados horárias
+Resolução: 0.25° (~28 km), dados horários
 Fonte: Copernicus Climate Data Store (CDS)
 
-Para o evento do ciclone Akará: 14-22 de fevereiro de 2024
+Author: Danilo Couto de Souza
+Date: October 2025
+Project: Akará Cyclone Analysis
 """
 
 import os
@@ -27,6 +29,14 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
+
+# Import configuration
+try:
+    from config import START_DATE, END_DATE, BBOX
+except ImportError:
+    print("❌ Erro: arquivo config.py não encontrado")
+    print("💡 Copie config.py.template para config.py e configure suas credenciais")
+    sys.exit(1)
 try:
     import cdsapi
 except ImportError:
@@ -55,12 +65,12 @@ class ERA5WaveDownloader:
             print("💡 Configure suas credenciais CDS em ~/.cdsapirc")
             raise
         
-        # Região Atlântico Sul (formato CDS: North/West/South/East)
+        # Região de interesse (do config.py)
         self.region = {
-            'north': -15.0,
-            'south': -45.0,
-            'west': -50.0,
-            'east': -20.0
+            'north': BBOX['north'],
+            'south': BBOX['south'],
+            'west': BBOX['west'],
+            'east': BBOX['east']
         }
         
         # Variáveis de ondas disponíveis no ERA5
@@ -92,6 +102,8 @@ class ERA5WaveDownloader:
                 print("📂 Carregando dados existentes...")
                 ds = xr.open_dataset(output_file)
                 print("✅ Dados ERA5 carregados com sucesso!")
+                print(f"📊 Dimensões: {dict(ds.sizes)}")
+                print(f"📋 Variáveis: {list(ds.data_vars.keys())}")
                 return ds
             
             # Converter datas
@@ -192,12 +204,8 @@ class ERA5WaveDownloader:
             
             plt.tight_layout()
             
-            # Salvar na pasta era5_only
-            base_dir = Path(__file__).parent.parent.parent
-            era5_figures_dir = base_dir / 'figures' / 'era5_only'
-            era5_figures_dir.mkdir(parents=True, exist_ok=True)
-            
-            preview_file = era5_figures_dir / 'era5_waves_preview.png'
+            # Salvar figura
+            preview_file = self.output_dir / 'era5_waves_preview.png'
             plt.savefig(preview_file, dpi=150, bbox_inches='tight')
             plt.close()
             
@@ -208,8 +216,10 @@ class ERA5WaveDownloader:
 
 def main():
     """Função principal para download de dados ERA5."""
+    print("=" * 60)
     print("🌊 DOWNLOAD E PROCESSAMENTO DOS DADOS ERA5 WAVES")
     print("=" * 60)
+    print()
     
     # Diretório de saída
     base_dir = Path(__file__).parent.parent
@@ -223,15 +233,18 @@ def main():
     
     print(f"🌍 Região: {downloader.region}")
     print(f"📊 Variáveis: {len(downloader.variables)} selecionadas")
+    print()
     
-    # Baixar dados para o período do ciclone Akará
-    start_date = '2024-02-16'  # Período central
-    end_date = '2024-02-20'    # 5 dias de dados
+    # Baixar dados para o período configurado (do config.py)
+    print(f"📅 Período configurado: {START_DATE} a {END_DATE}")
+    print(f"🌍 Região configurada: {BBOX}")
+    print()
     
-    ds = downloader.download_era5_waves(start_date, end_date)
+    ds = downloader.download_era5_waves(START_DATE, END_DATE)
     
     if ds is not None:
-        print(f"\\n📊 RESUMO DOS DADOS ERA5 REAIS:")
+        print()
+        print(f"📊 RESUMO DOS DADOS ERA5:")
         
         # Detectar variável de tempo correta
         time_var = None
@@ -243,20 +256,32 @@ def main():
         if time_var:
             print(f"🗓️ Período: {ds[time_var].min().dt.strftime('%Y-%m-%d').values} a {ds[time_var].max().dt.strftime('%Y-%m-%d').values}")
         else:
-            print(f"🗓️ Período: conforme solicitado ({start_date} a {end_date})")
+            print(f"🗓️ Período: conforme solicitado ({START_DATE} a {END_DATE})")
             
-        print(f"🌍 Dimensões: {dict(ds.sizes)}")  # Usar sizes em vez de dims
+        print(f"🌍 Dimensões: {dict(ds.sizes)}")
         print(f"📋 Variáveis: {list(ds.data_vars.keys())}")
         
         # Criar prévia
         downloader.create_quick_preview(ds)
         
-        print("\\n✅ Download de dados ERA5 REAIS concluído!")
-        print("🚀 Próximo passo: criar visualizações combinadas SWOT + ERA5")
+        print()
+        print("=" * 60)
+        print("✅ Download de dados ERA5 concluído!")
+        print("=" * 60)
+        print()
+        print("� Próximos passos:")
+        print("   - Visualizar preview: data/era5_waves/era5_waves_preview.png")
+        print("   - Criar animações: python scripts/create_wave_animations.py")
+        print("   - Comparar com boias: python scripts/compare_buoy_locations.py")
     else:
-        print("❌ FALHA no download dos dados ERA5 REAIS")
+        print()
+        print("=" * 60)
+        print("❌ FALHA no download dos dados ERA5")
+        print("=" * 60)
+        print()
         print("💡 Verifique suas credenciais do Copernicus CDS")
-        print("💡 Configure ~/.cdsapirc com sua API key")
+        print("💡 Configure ~/.cdsapirc com sua API key do CDS")
+        print("💡 Registre-se em: https://cds.climate.copernicus.eu/")
         sys.exit(1)
 
 if __name__ == "__main__":
