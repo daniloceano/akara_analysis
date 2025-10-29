@@ -1,0 +1,22 @@
+# Requisitos para análise oceânica do ciclone Akará
+
+# Download de dados
+copernicusmarine
+
+# Análise e processamento
+numpy
+pandas
+xarray
+netCDF4
+
+# Visualização
+matplotlib
+cartopy
+cmocean
+
+# Animações
+ffmpeg-python
+
+# Jupyter (opcional, para notebooks)
+jupyter
+ipykernel
