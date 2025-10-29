@@ -1,0 +1,59 @@
+# Arquivos de dados (podem ser grandes)
+data/raw/*.nc
+data/raw/*.h5
+data/raw/*.hdf5
+data/processed/*.nc
+data/processed/*.h5
+data/processed/*.hdf5
+
+# Credenciais e configurações sensíveis
+**/config.ini
+**/credentials.json
+**/.env
+
+# Arquivos Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Ambiente virtual
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+tmp.*
+temp.*

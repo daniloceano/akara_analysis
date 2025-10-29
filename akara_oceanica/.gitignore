@@ -1,0 +1,35 @@
+# Dados baixados
+data/*/
+
+# Arquivos NetCDF
+*.nc
+*.nc4
+
+# Configuração com credenciais
+scripts/config.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

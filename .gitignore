@@ -166,5 +166,28 @@ figures/.DS_Store
 new_files/*.nc
 old_files/*nc
 old_files/*/*nc
+SWOT/figures/*/*png
+SWOT/figures/*/*/*.png
+SWOT/archive/*/*.png
+SWOT/archive/*.png
+
+# Dados SWOT, ERA5, WAVERYS e outros grandes
+SWOT/data/raw/
+SWOT/data/era5_waves/
+SWOT/data/waverys/
+SWOT/data/processed/
+
+# Figuras geradas (exceto GIFs)
+SWOT/figures/**/*.png
+SWOT/figures/**/*.jpg
+SWOT/figures/**/*.tif
+SWOT/figures/**/*.pdf
+SWOT/figures/**/*.gif
+SWOT/archive/**/*.png
+SWOT/archive/**/*.pdf
+SWOT/**/*.DS_Store
+.DS_Store
+
+# Resultados novos
 new_files/akara1_fixed/
 new_files/akara1_track/

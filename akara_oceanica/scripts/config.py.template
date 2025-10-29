@@ -1,0 +1,44 @@
+"""
+Configurações para análise oceânica do ciclone Akará
+"""
+
+# Credenciais Copernicus Marine Service
+# IMPORTANTE: Copie este arquivo para config.py e adicione suas credenciais
+COPERNICUS_USERNAME = "seu_email@exemplo.com"
+COPERNICUS_PASSWORD = "sua_senha_aqui"
+
+# Período do ciclone Akará
+START_DATE = "2024-02-14"
+END_DATE = "2024-02-22"
+
+# Região de interesse (Atlântico Sul - aproximada para o ciclone Akará)
+# Expandida para garantir cobertura completa
+BBOX = {
+    'south': -45.0,   # Latitude sul
+    'north': -15.0,   # Latitude norte  
+    'west': -50.0,    # Longitude oeste
+    'east': -20.0     # Longitude leste
+}
+
+# Produtos de satélite CMEMS (L3 - ondas)
+DATASETS = {
+    'CFOSAT': 'cmems_obs-wave_glo_phy-swh_nrt_cfo-l3_PT1S',
+    'CryoSat-2': 'cmems_obs-wave_glo_phy-swh_nrt_c2-l3_PT1S',
+    'HaiYang-2B': 'cmems_obs-wave_glo_phy-swh_nrt_h2b-l3_PT1S',
+    'HaiYang-2C': 'cmems_obs-wave_glo_phy-swh_nrt_h2c-l3_PT1S',
+    'Jason-3': 'cmems_obs-wave_glo_phy-swh_nrt_j3-l3_PT1S',
+    'Saral/AltiKa': 'cmems_obs-wave_glo_phy-swh_nrt_al-l3_PT1S',
+    'Sentinel-3A': 'cmems_obs-wave_glo_phy-swh_nrt_s3a-l3_PT1S',
+    'Sentinel-3B': 'cmems_obs-wave_glo_phy-swh_nrt_s3b-l3_PT1S',
+    'Sentinel-6A': 'cmems_obs-wave_glo_phy-swh_nrt_s6a-l3_PT1S',
+    'SWOT_nadir': 'cmems_obs-wave_glo_phy-swh_nrt_swon-l3_PT1S',
+}
+
+# Variáveis a serem baixadas
+VARIABLES = ["VAVH", "VAVH_UNFILTERED", "WIND_SPEED"]
+
+# Profundidade (superfície)
+DEPTH = {
+    'minimum': 0,
+    'maximum': 0
+}
