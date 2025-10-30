@@ -1,0 +1,141 @@
+================================================================================
+WAVE SPECTRA ANALYSIS - AKARÁ CYCLONE
+================================================================================
+Generated: 2025-10-30 09:01:15
+
+--------------------------------------------------------------------------------
+1. DATA OVERVIEW
+--------------------------------------------------------------------------------
+
+CFOSAT SWIM Data:
+  Total measurements: 35,672
+  Date range: 2024-02-12 01:44:00 to 2024-02-16 00:09:00
+  Geographic coverage:
+    Longitude: -179.99° to 180.00°
+    Latitude: -78.71° to 80.68°
+
+Sentinel-1A SAR Data:
+  Total measurements: 6,080
+  Date range: 2024-02-12 03:46:00 to 2024-02-15 23:59:00
+  Geographic coverage:
+    Longitude: -179.98° to 179.97°
+    Latitude: -74.41° to 60.22°
+
+--------------------------------------------------------------------------------
+2. AKARÁ CYCLONE REGION (Feb 12-16, 2024)
+--------------------------------------------------------------------------------
+Region: 50°W to 30°W, 45°S to 20°S
+
+SWIM measurements in Akará region: 418
+SAR measurements in Akará region: 95
+
+--------------------------------------------------------------------------------
+3. SIGNIFICANT WAVE HEIGHT (SWH) STATISTICS
+--------------------------------------------------------------------------------
+
+SWIM - Akará Region:
+  Minimum SWH: 4.27 m
+  Maximum SWH: 28.08 m
+  Mean SWH: 10.42 m
+  Median SWH: 8.62 m
+  Standard deviation: 5.98 m
+
+SAR - Akará Region:
+  Minimum SWH: 0.73 m
+  Maximum SWH: 25.06 m
+  Mean SWH: 9.55 m
+  Median SWH: 8.07 m
+  Standard deviation: 5.42 m
+
+--------------------------------------------------------------------------------
+4. PEAK PERIOD STATISTICS
+--------------------------------------------------------------------------------
+
+SWIM - Akará Region:
+  Minimum Tp: 5.7 s
+  Maximum Tp: 18.0 s
+  Mean Tp: 12.9 s
+  Median Tp: 12.3 s
+
+SAR - Akará Region:
+  Minimum Tp: 7.6 s
+  Maximum Tp: 16.4 s
+  Mean Tp: 12.7 s
+  Median Tp: 12.3 s
+
+--------------------------------------------------------------------------------
+5. SEA STATE PARTITIONING (Wind Sea vs Swell)
+--------------------------------------------------------------------------------
+
+SWIM - Akará Region:
+  Mean Wind Sea SWH: 4.75 m
+  Mean Swell SWH: 9.16 m
+  Mean Swell Fraction: 85.8%
+  Swell-dominated conditions (>80% swell): 352 / 418 (84.2%)
+
+SAR - Akará Region:
+  Mean Wind Sea SWH: 1.95 m
+  Mean Swell SWH: 9.30 m
+  Mean Swell Fraction: 96.1%
+  Swell-dominated conditions (>80% swell): 94 / 95 (98.9%)
+
+--------------------------------------------------------------------------------
+6. WAVE DIRECTION STATISTICS
+--------------------------------------------------------------------------------
+
+SWIM - Akará Region:
+  Mean Direction: 94.0°
+  Direction Range: 0.0° to 346.0°
+  Directional Spread: 81.0°
+
+SAR - Akará Region:
+  Mean Direction: 61.8°
+  Direction Range: 4.1° to 357.5°
+  Directional Spread: 37.8°
+
+--------------------------------------------------------------------------------
+7. KEY FINDINGS
+--------------------------------------------------------------------------------
+
+• Maximum wave height observed:
+  SWIM: 28.08 m on 2024-02-14 09:24:00
+  SAR: 25.06 m on 2024-02-15 07:30:00
+
+• Sea state characteristics:
+  - Both datasets show swell-dominated conditions (86% SWIM, 96% SAR)
+  - Long-period swell prevails (mean Tp: 12.9s SWIM, 12.7s SAR)
+  - Significant wave heights reached extreme values (>25 m)
+
+• Dataset comparison:
+  - Mean SWH difference: 8.4% (0.87 m)
+  - Both sensors capture similar wave conditions
+  - SAR shows higher swell dominance (96.1% vs 85.8%)
+
+--------------------------------------------------------------------------------
+8. GENERATED FIGURES
+--------------------------------------------------------------------------------
+
+Global Analysis:
+  • swim_spectra_grid.png - Polar plots of SWIM spectra
+  • swim_time_series.png - SWIM parameter evolution
+  • swim_spatial_distribution.png - Spatial maps of SWIM data
+  • sar_spectra_grid.png - Polar plots of SAR spectra
+  • sar_time_series.png - SAR parameter evolution
+  • sar_spatial_distribution.png - Spatial maps of SAR data
+
+Akará Focused Analysis:
+  • akara_swim_sar_comparison.png - Direct comparison of SWIM and SAR
+  • akara_statistics_comparison.png - Statistical boxplots
+
+--------------------------------------------------------------------------------
+9. OUTPUT DATA FILES
+--------------------------------------------------------------------------------
+
+  • swim_analysis_results.csv - Complete SWIM analysis
+  • sar_analysis_results.csv - Complete SAR analysis
+  • swim_akara_region.csv - SWIM data for Akará region
+  • sar_akara_region.csv - SAR data for Akará region
+
+================================================================================
+END OF REPORT
+================================================================================
