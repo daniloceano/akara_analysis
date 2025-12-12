@@ -39,10 +39,10 @@ colors = {
 # Labels for each term
 labels = {
     'Ck_1': r'$C_k^A$',
-    'Ck_2': r'$C_k^A$',
-    'Ck_3': r'$C_k^B$',
-    'Ck_4': r'$C_k^C$',
-    'Ck_5': r'$C_k^D$',
+    'Ck_2': r'$C_k^B$',
+    'Ck_3': r'$C_k^C$',
+    'Ck_4': r'$C_k^D$',
+    'Ck_5': r'$C_k^E$',
 }
 
 def load_ck_data(term):
