@@ -11,7 +11,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Define paths
-base_path = Path('/home/daniloceano/Documents/Programs_and_scripts/akara_analysis/new_files/akara1_track')
+base_path = Path('./akara1_track')
 data_path = base_path / 'results_vertical_levels'
 output_path = Path("./")
 output_path.mkdir(exist_ok=True)
@@ -81,7 +81,7 @@ def create_vertical_profiles():
         for term in ck_terms:
             df = load_ck_data(term)
             pressure, values = compute_stage_mean(df, start_time, end_time)
-            values_per_day = values * 86400
+            values_per_day = values
             stage_profiles[term] = (pressure, values_per_day)
             
             # Update global min/max

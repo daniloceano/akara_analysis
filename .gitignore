@@ -199,3 +199,6 @@ akara_oceanica/akara/etc/*
 akara_oceanica/akara/bin
 akara_oceanica/akara/lib64
 akara_oceanica/akara/pyvenv.cfg
+
+#
+*/.DS_Store
